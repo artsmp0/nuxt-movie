@@ -22,3 +22,9 @@
   - 缺点：要区分客户端和服务端两套 API，开发成本高；服务器性能要好，运行成本高。
 - [HR](https://nuxt.com/docs/guide/concepts/rendering#route-rules)：Hybrid Rendering -> 针对不同路由，可以选择不同的渲染方式，比如首页使用 UR，其他页面使用 CSR
 - Rendering on CDN Edge Workers：传统的 SSR 和 UR 仅支持在服务器上渲染，nuxt3 则支持在 CDN 上渲染，减少延迟和服务器成本。（底层由 Nitro 支持）
+
+## components
+
+- `<ClientOnly> Component`
+- `.client Components`：此功能仅适用于 Nuxt 自动导入和 #components 导入。从真实的路径显式导入这些组件不会将它们转换为仅限客户端的组件。.client 组件仅在挂载后渲染。要使用 onMounted() 访问呈现的模板，请在 onMounted() 钩子的回调中添加 await nextTick() 。
+- `.server Components`：独立服务器组件将始终在服务器上呈现。当他们的 props 更新时，这将导致一个网络请求，该请求将就地更新所呈现的 HTML。服务器组件目前是实验性的，为了使用它们，你需要在 nuxt.config 中启用 `experimental.componentIslands` 功能。服务器组件在其当前开发状态下不支持插槽
